@@ -1,0 +1,20 @@
+START.
+XX-XXX Y-S.
+XX-XX Z.
+X-XX XY-1.
+XXX A-B.
+XXX J-.
+xxx A.
+
+MAIN.
+
+PRINT "Please enter a number here?? |[".
+INPUT J-.
+PRINT "Input here is>? "; Z.
+ADD Z TO Y-S.
+PRINT Y-S; "sdfs".
+A-B EQUALS-TO A-B.
+INPUT Y-S; A-B.
+MOVE 1.1 TO Z.
+
+END-NOW.

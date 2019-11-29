@@ -20,18 +20,19 @@ start (S|s)(T|t)(A|a)(R|r)(T|t)\.
 end   (E|e)(N|n)(D|d)\-(N|n)(O|o)(W|w)\.
 main  (M|m)(A|a)(I|i)(N|n)\.
 print (P|p)(R|r)(I|i)(N|n)(T|t)
-equalsto (E|e)(Q|q)(U|u)(A|a)(S|s)\-(T|t)(O|o)
-equalstovalue (E|e)(Q|q)(U|u)(A|a)(S|s)\-(T|t)(O|o)\-(V|v)(A|a)(L|l)(U|u)(E|e)
+equalsto (E|e)(Q|q)(U|u)(A|a)(L|l)(S|s)\-(T|t)(O|o)
+equalstovalue (E|e)(Q|q)(U|u)(A|a)(L|l)(S|s)\-(T|t)(O|o)\-(V|v)(A|a)(L|l)(U|u)(E|e)
 add (A|a)(D|d)(D|d)
 to (T|t)(O|o)
 input (I|i)(N|n)(P|p)(U|u)(T|t)
 x     (X|x)
 string ({digit}|{letter}|{punctuation}|{whitespace})*
-stringwithoutspace ({digit}|{letter}|{punctuation})*
+stringwithoutspace ({digit}|{letter}|{punctuation}){0,6}
 double ({x}*\-?{x}+)
-identifier ({letter}+{stringwithoutspace})
-inputbody ({identifier})({identifier}\;)*
+identifier ({letter}{stringwithoutspace})
+inputbody ({identifier})(\;{identifier})*
 outputbody ({identifier}\;)?(\"{string}\"\;{identifier})+
+doublevalue ({digit}+)(\.{digit}+)?
 
 %%
 
@@ -79,10 +80,16 @@ outputbody ({identifier}\;)?(\"{string}\"\;{identifier})+
 													printf("is the double type which specifies a %d-digit number with %d decimal places can be held in the variable\n", frequency1, frequency2);
 												  }
 												}
+{doublevalue}									{ printf("%s: is the double value\n", yytext); }
 {identifier}									{ printf("%s: is the identifier\n", yytext); }
 {double}{whitespace}{identifier}\.				{ printf("%s: is the declaration statement\n", yytext); }
 {input}{whitespace}{inputbody}\.				{ printf("%s: is the input statement\n", yytext); }					
 {print}{whitespace}{outputbody}\.				{ printf("%s: is the output statement\n", yytext); }
+{identifier}{whitespace}{equalsto}{whitespace}{identifier}\. 			 { printf("%s: is the assignment statement\n", yytext); }
+{identifier}{whitespace}{equalstovalue}{whitespace}{doublevalue}\.  	 { printf("%s: is the assignment statement\n", yytext); }
+{add}{whitespace}{doublevalue}{whitespace}{to}{whitespace}{identifier}\. { printf("%s: is the add-to statement\n", yytext); }
+{add}{whitespace}{identifier}{whitespace}{to}{whitespace}{identifier}\.  { printf("%s: is the add-to statement\n", yytext); }
+
 
 .|\n											{ ECHO; /* normal default */ }
 .*												{ printf("unknown\n"); }

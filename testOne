@@ -1,0 +1,23 @@
+START.
+END-NOW.
+
+START.
+XXX XY-1.
+XXXX Y.
+XXXX Z.
+MAIN.
+PRINT "Please enter a number? ".
+INPUT Y.
+Z EQUALS-TO Z.
+ADD Y TO Z.
+END-NOW.
+
+start.
+xxx xxy-1.
+main.
+print " a".
+input y.
+z equals-to z.
+add y to z.
+print xy;y.
+end-now.
